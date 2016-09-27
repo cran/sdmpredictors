@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Samuel Bosch" />
+
+<meta name="date" content="2016-09-26" />
+
+<title>sdmpredictors quickstart guide</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%7D%0Apre%20%7B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">sdmpredictors quickstart guide</h1>
+<h4 class="author"><em>Samuel Bosch</em></h4>
+<h4 class="date"><em>2016-09-26</em></h4>
+
+
+
+<p>The goal of sdmpredictors is to make environmental data, commonly used for species distribution modelling (SDM), also called ecological niche modelling (ENM) or habitat suitability modelling, easy to use in R. It contains methods for getting metadata about the available environmental data for the current climate but also for future and paleo climatic conditions. A way to download the rasters and load them into R and some general statistics about the different layers.</p>
+<div id="getting-the-metadata" class="section level2">
+<h2>Getting the metadata</h2>
+<p>Different list_* functions are available in order to find out which datasets and environmental layers can be downloaded.</p>
+<div id="list_datasets" class="section level3">
+<h3>list_datasets</h3>
+<p>With the list_datasets function you can view all the available datasets. If you want only terrestrial datasets then you have to set the marine parameter to FALSE and vice versa.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sdmpredictors)
+
+<span class="co"># exploring the marine datasets </span>
+datasets &lt;-<span class="st"> </span><span class="kw">list_datasets</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>, <span class="dt">marine =</span> <span class="ot">TRUE</span>)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">dataset_code</th>
+<th align="left">terrestrial</th>
+<th align="left">marine</th>
+<th align="left">url</th>
+<th align="left">description</th>
+<th align="left">citation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bio-ORACLE</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="left"><a href="http://www.oracle.ugent.be/" class="uri">http://www.oracle.ugent.be/</a></td>
+<td align="left">Bio-ORACLE is a set of GIS rasters providing marine environmental information for global-scale applications. It offers an array of geophysical, biotic and climate data at a spatial resolution 5 arcmin (9.2 km) in the ESRI ascii format.</td>
+<td align="left">Tyberghein L., Verbruggen H., Pauly K., Troupin C., Mineur F. &amp; De Clerck O. Bio-ORACLE: a global environmental dataset for marine species distribution modeling. Global Ecology and Biogeography. <a href="http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x" class="uri">http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x</a></td>
+</tr>
+<tr class="even">
+<td align="left">MARSPEC</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="left"><a href="http://marspec.org/" class="uri">http://marspec.org/</a></td>
+<td align="left">MARSPEC is a set of high resolution climatic and geophysical GIS data layers for the world ocean. Seven geophysical variables were derived from the SRTM30_PLUS high resolution bathymetry dataset. These layers characterize the horizontal orientation (aspect), slope, and curvature of the seafloor and the distance from shore. Ten bioclimatic variables were derived from NOAA’s World Ocean Atlas and NASA’s MODIS satellite imagery and characterize the inter-annual means, extremes, and variances in sea surface temperature and salinity. These variables will be useful to those interested in the spatial ecology of marine shallow-water and surface-associated pelagic organisms across the globe. Note that, in contrary to the original MARSPEC, all layers have unscaled values.</td>
+<td align="left">Sbrocco, EJ and Barber, PH (2013) MARSPEC: Ocean climate layers for marine spatial ecology. Ecology 94: 979. <a href="http://dx.doi.org/10.1890/12-1358.1" class="uri">http://dx.doi.org/10.1890/12-1358.1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="list_layers" class="section level3">
+<h3>list_layers</h3>
+<p>Using the list_layers we can view all layer information based on datasets, terrestrial (TRUE/FALSE), marine (TRUE/FALSE) and/or whether it should be monthly data. The table only shows the first 4 columns of the first 3 layers.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># exploring the marine layers </span>
+layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(datasets)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">dataset_code</th>
+<th align="left">layer_code</th>
+<th align="left">name</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bio-ORACLE</td>
+<td align="left">BO_calcite</td>
+<td align="left">Calcite (mean)</td>
+<td align="left">Calcite concentration indicates the mean concentration of calcite (CaCO3) in oceans.</td>
+</tr>
+<tr class="even">
+<td align="left">Bio-ORACLE</td>
+<td align="left">BO_chlomax</td>
+<td align="left">Chlorophyll A (maximum)</td>
+<td align="left">Chlorophyll A concentration indicates the concentration of photosynthetic pigment chlorophyll A (the most common green chlorophyll) in oceans. Please note that in shallow water these values may reflect any kind of autotrophic biomass.</td>
+</tr>
+<tr class="odd">
+<td align="left">Bio-ORACLE</td>
+<td align="left">BO_chlomean</td>
+<td align="left">Chlorophyll A (mean)</td>
+<td align="left">Chlorophyll A concentration indicates the concentration of photosynthetic pigment chlorophyll A (the most common green chlorophyll) in oceans. Please note that in shallow water these values may reflect any kind of autotrophic biomass.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="loading-the-data" class="section level2">
+<h2>Loading the data</h2>
+<div id="load_layers" class="section level3">
+<h3>load_layers</h3>
+<p>To be able to use the layers you want in R you have to call the load_layers function with</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download first two layers (BO_calcite, BO_chlomax) </span>
+<span class="kw">load_layers</span>(layers[<span class="dv">1</span>:<span class="dv">2</span>,])</code></pre>
+<pre><code>## class       : RasterStack 
+## dimensions  : 2160, 4320, 9331200, 2  (nrow, ncol, ncell, nlayers)
+## resolution  : 0.08333333, 0.08333333  (x, y)
+## extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## names       : BO_calcite, BO_chlomax 
+## min values  :      5e-05,      1e-02 
+## max values  :   0.055976,  64.565000</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># (down)load specific layers </span>
+specific &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_calcite&quot;</span>, <span class="st">&quot;BO_chlomax&quot;</span>, <span class="st">&quot;MS_bathy_5m&quot;</span>))
+
+<span class="co"># to load equal area data (Behrmann equal area projection) </span>
+equalarea &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="st">&quot;BO_sstmean&quot;</span>, <span class="dt">equalarea =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># get the default on disc storage location</span>
+<span class="co"># use the datadir parameter in load_layers </span>
+<span class="co"># or set the sdmpredictors_datadir option to change it </span>
+sdmpredictors:::<span class="kw">get_datadir</span>(<span class="ot">NULL</span>) </code></pre>
+<pre><code>## [1] &quot;D:/Swbosch/R/sdmpredictors&quot;</code></pre>
+</div>
+</div>
+<div id="loading-future-and-paleo-data" class="section level2">
+<h2>Loading future and paleo data</h2>
+<p>Similarly to the current climate layers</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># exploring the available future marine layers </span>
+future &lt;-<span class="st"> </span><span class="kw">list_layers_future</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>) 
+<span class="co"># available scenarios </span>
+<span class="kw">unique</span>(future$scenario) </code></pre>
+<pre><code>## [1] &quot;A1B&quot; &quot;A2&quot;  &quot;B1&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(future$year)</code></pre>
+<pre><code>## [1] 2100 2200</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">paleo &lt;-<span class="st"> </span><span class="kw">list_layers_paleo</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>)
+<span class="kw">unique</span>(paleo$epoch) </code></pre>
+<pre><code>## [1] &quot;Last Glacial Maximum&quot; &quot;mid-Holocene&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(paleo$model_name) </code></pre>
+<pre><code>## [1] &quot;21kya_geophysical&quot;      &quot;21kya_ensemble_noCCSM&quot; 
+## [3] &quot;21kya_ensemble_adjCCSM&quot; &quot;6kya_Ensemble&quot;</code></pre>
+<p>Other functions related to layers metadata and future and paleo layers are:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_layers_info</span>(<span class="kw">c</span>(<span class="st">&quot;BO_calcite&quot;</span>,<span class="st">&quot;BO_B1_2100_sstmax&quot;</span>,<span class="st">&quot;MS_bathy_21kya&quot;</span>))$common[,<span class="dv">1</span>:<span class="dv">4</span>]</code></pre>
+<pre><code>##       time dataset_code        layer_code
+## 69 current   Bio-ORACLE        BO_calcite
+## 17  future   Bio-ORACLE BO_B1_2100_sstmax
+## 3    paleo      MARSPEC    MS_bathy_21kya
+##                                 name
+## 69                    Calcite (mean)
+## 17 Sea surface temperature (maximum)
+## 3                         Bathymetry</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent future layer for a current climate layer </span>
+<span class="kw">get_future_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_sstmax&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>), 
+                  <span class="dt">scenario =</span> <span class="st">&quot;B1&quot;</span>, 
+                  <span class="dt">year =</span> <span class="dv">2100</span>)$layer_code </code></pre>
+<pre><code>## [1] &quot;BO_B1_2100_salinity&quot; &quot;BO_B1_2100_sstmax&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent paleo layer for a current climate layer </span>
+<span class="kw">get_paleo_layers</span>(<span class="kw">c</span>(<span class="st">&quot;MS_bathy_5m&quot;</span>, <span class="st">&quot;MS_biogeo13_sst_mean_5m&quot;</span>), 
+                 <span class="dt">model_name =</span> <span class="kw">c</span>(<span class="st">&quot;21kya_geophysical&quot;</span>, <span class="st">&quot;21kya_ensemble_adjCCSM&quot;</span>), 
+                 <span class="dt">years_ago =</span> <span class="dv">21000</span>)$layer_code </code></pre>
+<pre><code>## [1] &quot;MS_bathy_21kya&quot;                    
+## [2] &quot;MS_biogeo13_sst_mean_21kya_adjCCSM&quot;</code></pre>
+</div>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+<p>Two types of statistics are available for the current climate layers:</p>
+<ul>
+<li>individual layer statistics
+<ul>
+<li>summary statistics (minimum, q1, median, q3, maximum, mad, mean and sd)</li>
+<li>spatial autocorrelation (Moran’s I and Geary’s C)</li>
+</ul></li>
+<li>Pearson correlation coefficient between the different layers and their quadratic</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># looking up statistics and correlations for marine annual layers</span>
+datasets &lt;-<span class="st"> </span><span class="kw">list_datasets</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>, <span class="dt">marine =</span> <span class="ot">TRUE</span>)
+layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(datasets)
+
+<span class="co"># filter out monthly layers</span>
+layers &lt;-<span class="st"> </span>layers[<span class="kw">is.na</span>(layers$month),]
+
+<span class="kw">layer_stats</span>(layers)[<span class="dv">1</span>:<span class="dv">2</span>,]</code></pre>
+<pre><code>##     layer_code minimum    q1 median    q3 maximum      mad      mean
+## 1  BO_bathymax   -9906 -4748  -3948 -2784    2361 1361.027 -3525.239
+## 2 BO_bathymean  -10494 -4876  -4098 -3005    1721 1307.653 -3675.429
+##         sd     moran      geary
+## 1 1651.386 0.9670128 0.01461685
+## 2 1645.478 0.9706400 0.01073758</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">correlations &lt;-<span class="st"> </span><span class="kw">layers_correlation</span>(layers)
+
+<span class="co"># create groups of layers where no layers in one group </span>
+<span class="co"># have a correlation &gt; 0.7 with a layer from another group </span>
+groups &lt;-<span class="st"> </span><span class="kw">correlation_groups</span>(correlations, <span class="dt">max_correlation=</span><span class="fl">0.7</span>)
+
+<span class="co"># group lengths</span>
+<span class="kw">sapply</span>(groups, length)</code></pre>
+<pre><code>##  [1]  1  7 15  1  6  3  4  1  1  3  1  1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">for(group in groups) {
+  if(<span class="kw">length</span>(group) &gt;<span class="st"> </span><span class="dv">1</span>) {
+    <span class="kw">cat</span>(<span class="kw">paste</span>(group, <span class="dt">collapse =</span><span class="st">&quot;, &quot;</span>))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre>
+<pre><code>## BO_chlomax, BO_chlomean, BO_chlomin, BO_chlorange, BO_damax, BO_damean, BO_damin
+## BO_cloudmax, BO_cloudmean, BO_cloudmin, BO_parmax, BO_parmean, BO_dissox, BO_nitrate, BO_phosphate, BO_sstmax, BO_sstmean, BO_sstmin, MS_biogeo13_sst_mean_5m, MS_biogeo14_sst_min_5m, MS_biogeo15_sst_max_5m, BO_silicate
+## BO_salinity, MS_biogeo08_sss_mean_5m, MS_biogeo09_sss_min_5m, MS_biogeo10_sss_max_5m, MS_biogeo11_sss_range_5m, MS_biogeo12_sss_variance_5m
+## BO_sstrange, MS_biogeo16_sst_range_5m, MS_biogeo17_sst_variance_5m
+## BO_bathymin, BO_bathymax, BO_bathymean, MS_bathy_5m
+## MS_biogeo03_plan_curvature_5m, MS_biogeo07_concavity_5m, MS_biogeo04_profile_curvature_5m</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
