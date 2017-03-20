@@ -15,19 +15,17 @@ layers <- list_layers(datasets)
 knitr::kable(layers[1:3,1:4], row.names = FALSE)
 
 ## ------------------------------------------------------------------------
-# download first two layers (BO_calcite, BO_chlomax) 
-load_layers(layers[1:2,])
+# download first two layers (BO_calcite, BO_chlomax) to the temporary directory
+load_layers(layers[1:2,], datadir = tempdir())
+
+# set a default datadir
+options(sdmpredictors_datadir= tempdir())
 
 # (down)load specific layers 
-specific <- load_layers(c("BO_calcite", "BO_chlomax", "MS_bathy_5m"))
+specific <- load_layers(c("BO_calcite", "BO_chlomax"))
 
 # to load equal area data (Behrmann equal area projection) 
 equalarea <- load_layers("BO_sstmean", equalarea = TRUE)
-
-# get the default on disc storage location
-# use the datadir parameter in load_layers 
-# or set the sdmpredictors_datadir option to change it 
-sdmpredictors:::get_datadir(NULL) 
 
 ## ------------------------------------------------------------------------
 # exploring the available future marine layers 
@@ -43,12 +41,12 @@ unique(paleo$model_name)
 ## ------------------------------------------------------------------------
 get_layers_info(c("BO_calcite","BO_B1_2100_sstmax","MS_bathy_21kya"))$common[,1:4]
 
-# functions to get the equivalent future layer for a current climate layer 
+# functions to get the equivalent future layer code for a current climate layer 
 get_future_layers(c("BO_sstmax", "BO_salinity"), 
                   scenario = "B1", 
                   year = 2100)$layer_code 
 
-# functions to get the equivalent paleo layer for a current climate layer 
+# functions to get the equivalent paleo layer code for a current climate layer 
 get_paleo_layers(c("MS_bathy_5m", "MS_biogeo13_sst_mean_5m"), 
                  model_name = c("21kya_geophysical", "21kya_ensemble_adjCCSM"), 
                  years_ago = 21000)$layer_code 

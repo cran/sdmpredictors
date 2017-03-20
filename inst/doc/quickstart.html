@@ -12,7 +12,7 @@
 
 <meta name="author" content="Samuel Bosch" />
 
-<meta name="date" content="2016-09-26" />
+<meta name="date" content="2016-09-28" />
 
 <title>sdmpredictors quickstart guide</title>
 
@@ -52,7 +52,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <h1 class="title toc-ignore">sdmpredictors quickstart guide</h1>
 <h4 class="author"><em>Samuel Bosch</em></h4>
-<h4 class="date"><em>2016-09-26</em></h4>
+<h4 class="date"><em>2016-09-28</em></h4>
 
 
 
@@ -83,17 +83,17 @@ datasets &lt;-<span class="st"> </span><span class="kw">list_datasets</span>(<sp
 <td align="left">Bio-ORACLE</td>
 <td align="left">FALSE</td>
 <td align="left">TRUE</td>
-<td align="left"><a href="http://www.oracle.ugent.be/" class="uri">http://www.oracle.ugent.be/</a></td>
+<td align="left"><a href="http://www.oracle.ugent.be/">http://www.oracle.ugent.be/</a></td>
 <td align="left">Bio-ORACLE is a set of GIS rasters providing marine environmental information for global-scale applications. It offers an array of geophysical, biotic and climate data at a spatial resolution 5 arcmin (9.2 km) in the ESRI ascii format.</td>
-<td align="left">Tyberghein L., Verbruggen H., Pauly K., Troupin C., Mineur F. &amp; De Clerck O. Bio-ORACLE: a global environmental dataset for marine species distribution modeling. Global Ecology and Biogeography. <a href="http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x" class="uri">http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x</a></td>
+<td align="left">Tyberghein L., Verbruggen H., Pauly K., Troupin C., Mineur F. &amp; De Clerck O. Bio-ORACLE: a global environmental dataset for marine species distribution modeling. Global Ecology and Biogeography. <a href="http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x">http://dx.doi.org/10.1111/j.1466-8238.2011.00656.x</a></td>
 </tr>
 <tr class="even">
 <td align="left">MARSPEC</td>
 <td align="left">FALSE</td>
 <td align="left">TRUE</td>
-<td align="left"><a href="http://marspec.org/" class="uri">http://marspec.org/</a></td>
+<td align="left"><a href="http://marspec.org/">http://marspec.org/</a></td>
 <td align="left">MARSPEC is a set of high resolution climatic and geophysical GIS data layers for the world ocean. Seven geophysical variables were derived from the SRTM30_PLUS high resolution bathymetry dataset. These layers characterize the horizontal orientation (aspect), slope, and curvature of the seafloor and the distance from shore. Ten bioclimatic variables were derived from NOAA’s World Ocean Atlas and NASA’s MODIS satellite imagery and characterize the inter-annual means, extremes, and variances in sea surface temperature and salinity. These variables will be useful to those interested in the spatial ecology of marine shallow-water and surface-associated pelagic organisms across the globe. Note that, in contrary to the original MARSPEC, all layers have unscaled values.</td>
-<td align="left">Sbrocco, EJ and Barber, PH (2013) MARSPEC: Ocean climate layers for marine spatial ecology. Ecology 94: 979. <a href="http://dx.doi.org/10.1890/12-1358.1" class="uri">http://dx.doi.org/10.1890/12-1358.1</a></td>
+<td align="left">Sbrocco, EJ and Barber, PH (2013) MARSPEC: Ocean climate layers for marine spatial ecology. Ecology 94: 979. <a href="http://dx.doi.org/10.1890/12-1358.1">http://dx.doi.org/10.1890/12-1358.1</a></td>
 </tr>
 </tbody>
 </table>
@@ -140,8 +140,8 @@ layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(dataset
 <div id="load_layers" class="section level3">
 <h3>load_layers</h3>
 <p>To be able to use the layers you want in R you have to call the load_layers function with</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download first two layers (BO_calcite, BO_chlomax) </span>
-<span class="kw">load_layers</span>(layers[<span class="dv">1</span>:<span class="dv">2</span>,])</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download first two layers (BO_calcite, BO_chlomax) to the temporary directory</span>
+<span class="kw">load_layers</span>(layers[<span class="dv">1</span>:<span class="dv">2</span>,], <span class="dt">datadir =</span> <span class="kw">tempdir</span>())</code></pre>
 <pre><code>## class       : RasterStack 
 ## dimensions  : 2160, 4320, 9331200, 2  (nrow, ncol, ncell, nlayers)
 ## resolution  : 0.08333333, 0.08333333  (x, y)
@@ -150,17 +150,14 @@ layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(dataset
 ## names       : BO_calcite, BO_chlomax 
 ## min values  :      5e-05,      1e-02 
 ## max values  :   0.055976,  64.565000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># (down)load specific layers </span>
-specific &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_calcite&quot;</span>, <span class="st">&quot;BO_chlomax&quot;</span>, <span class="st">&quot;MS_bathy_5m&quot;</span>))
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set a default datadir</span>
+<span class="kw">options</span>(<span class="dt">sdmpredictors_datadir=</span> <span class="kw">tempdir</span>())
+
+<span class="co"># (down)load specific layers </span>
+specific &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_calcite&quot;</span>, <span class="st">&quot;BO_chlomax&quot;</span>))
 
 <span class="co"># to load equal area data (Behrmann equal area projection) </span>
-equalarea &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="st">&quot;BO_sstmean&quot;</span>, <span class="dt">equalarea =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># get the default on disc storage location</span>
-<span class="co"># use the datadir parameter in load_layers </span>
-<span class="co"># or set the sdmpredictors_datadir option to change it </span>
-sdmpredictors:::<span class="kw">get_datadir</span>(<span class="ot">NULL</span>) </code></pre>
-<pre><code>## [1] &quot;D:/Swbosch/R/sdmpredictors&quot;</code></pre>
+equalarea &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="st">&quot;BO_sstmean&quot;</span>, <span class="dt">equalarea =</span> <span class="ot">TRUE</span>)</code></pre>
 </div>
 </div>
 <div id="loading-future-and-paleo-data" class="section level2">
@@ -189,12 +186,12 @@ future &lt;-<span class="st"> </span><span class="kw">list_layers_future</span>(
 ## 69                    Calcite (mean)
 ## 17 Sea surface temperature (maximum)
 ## 3                         Bathymetry</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent future layer for a current climate layer </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent future layer code for a current climate layer </span>
 <span class="kw">get_future_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_sstmax&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>), 
                   <span class="dt">scenario =</span> <span class="st">&quot;B1&quot;</span>, 
                   <span class="dt">year =</span> <span class="dv">2100</span>)$layer_code </code></pre>
 <pre><code>## [1] &quot;BO_B1_2100_salinity&quot; &quot;BO_B1_2100_sstmax&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent paleo layer for a current climate layer </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># functions to get the equivalent paleo layer code for a current climate layer </span>
 <span class="kw">get_paleo_layers</span>(<span class="kw">c</span>(<span class="st">&quot;MS_bathy_5m&quot;</span>, <span class="st">&quot;MS_biogeo13_sst_mean_5m&quot;</span>), 
                  <span class="dt">model_name =</span> <span class="kw">c</span>(<span class="st">&quot;21kya_geophysical&quot;</span>, <span class="st">&quot;21kya_ensemble_adjCCSM&quot;</span>), 
                  <span class="dt">years_ago =</span> <span class="dv">21000</span>)$layer_code </code></pre>

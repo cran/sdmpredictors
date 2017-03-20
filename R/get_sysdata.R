@@ -1,17 +1,30 @@
 get_sysdata <- function() {
   # internal function used to load the layers information and statistics
   fname <- "sysdata.rda"
-  outfile <- paste0(get_datadir(NULL), "/", fname)
+  dir <- getOption("sdmpredictors_datadir")
+  if(is.null(dir)) {
+    dir <- file.path(tempdir(), "sdmpredictors")
+  }
+  if(!dir.exists(dir)) {
+    dir.create(dir, recursive = TRUE)
+  }
+  dir <- normalizePath(dir)
+  tmp <- tempfile("sysdata_sdmpredictors", fileext = ".rda")
+  outfile <- file.path(dir, fname)
   
   ## only download every 60 minutes
-  if(!file.exists(outfile) || difftime(Sys.time(), file.mtime(outfile), units = "mins") > 60) {
-    tryCatch({
+  if(!file.exists(outfile) || difftime(Sys.time(), file.mtime(outfile), units = "mins") > 24*60 || file.size(outfile) <= 0) {
+    ok <- -1
+    try({
       urlroot <- .data$urlsysdata
       url <- paste0(urlroot, fname)
-      download.file(url, outfile, quiet = TRUE)
-    }, error = {}, finally = {})
+      ok <- utils::download.file(url, tmp, quiet = TRUE)
+    }, silent = TRUE)
+    if(ok == 0) {
+      file.copy(tmp, outfile, overwrite = TRUE)
+    }
   }
-  if(file.exists(outfile) && file.size(outfile) > 0) {
+  if(file.exists(outfile)) {
     e <- new.env()
     load(outfile, envir = e)
     return(e$.data)
