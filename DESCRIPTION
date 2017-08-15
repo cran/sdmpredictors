@@ -1,8 +1,8 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.5
-Date: 2017-03-20
+Version: 0.2.6
+Date: 2017-08-15
 Depends: R (>= 3.2.5), raster (>= 2.5-8), rgdal (>= 1.1-10)
 Imports: R.utils (>= 2.4.0), stats, utils
 Authors@R: c(
@@ -11,7 +11,7 @@ Authors@R: c(
     person("Olivier", "De Clerck", email = "olivier.declerck@ugent.be", role = c("ctb")))
 Description: Terrestrial and marine predictors for species distribution modelling
     from multiple sources, including WorldClim <http://www.worldclim.org/>,,
-    ENVIREM <http://envirem.github.io/>, Bio-ORACLE <http://www.oracle.ugent.be/>
+    ENVIREM <http://envirem.github.io/>, Bio-ORACLE <http://bio-oracle.org/>
     and MARSPEC <http://www.marspec.org/>.
 License: MIT + file LICENSE
 URL: http://www.samuelbosch.com/p/sdmpredictors.html
@@ -21,10 +21,10 @@ Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-03-20 09:51:28 UTC; swbosch
+Packaged: 2017-08-15 12:08:42 UTC; swbosch
 Author: Samuel Bosch [aut, cre],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb]
 Maintainer: Samuel Bosch <mail@samuelbosch.com>
 Repository: CRAN
-Date/Publication: 2017-03-20 11:02:03 UTC
+Date/Publication: 2017-08-15 13:51:55 UTC
