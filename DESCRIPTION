@@ -1,8 +1,8 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.6
-Date: 2017-08-15
+Version: 0.2.8
+Date: 2018-07-19
 Depends: R (>= 3.2.5), raster (>= 2.5-8), rgdal (>= 1.1-10)
 Imports: R.utils (>= 2.4.0), stats, utils
 Authors@R: c(
@@ -18,13 +18,13 @@ URL: http://www.samuelbosch.com/p/sdmpredictors.html
 BugReports: https://github.com/lifewatch/sdmpredictors/issues
 LazyData: true
 Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-08-15 12:08:42 UTC; swbosch
+Packaged: 2018-07-19 12:24:46 UTC; samuel
 Author: Samuel Bosch [aut, cre],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb]
 Maintainer: Samuel Bosch <mail@samuelbosch.com>
 Repository: CRAN
-Date/Publication: 2017-08-15 13:51:55 UTC
+Date/Publication: 2018-07-19 12:40:03 UTC

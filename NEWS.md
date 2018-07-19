@@ -1,3 +1,11 @@
+# sdmpredictors 0.2.8
+
+Decrease test duration
+
+# sdmpredictors 0.2.7
+
+Add freshwater data
+
 # sdmpredictors 0.2.6
 
 Introduce dataset versions, fix citations
