@@ -2,6 +2,12 @@ library(sdmpredictors)
 
 context("Statistics")
 
+skip_version <- function(layers, dataset_code, version){
+  layer_skip <- subset(layers$layer_code, layers$dataset_code == dataset_code & layers$version == version)
+  layers <- subset(layers, !(layers$layer_code %in% layer_skip))
+  return(layers)
+}
+
 test_that("layer_stats without args returns all layers", {
   # layers <- list_layers()
   # layers <- layers[layers$layer_code != "WC_TODO",]
@@ -23,6 +29,7 @@ test_that("layer_stats with one or more existing layercodes works", {
 
 test_that("layer_stats with non existing layercodes generates a warning", {
   skip_on_cran()
+  skip_on_travis()
   
   expect_warning(layer_stats("blabla"), "'blabla'")
   expect_warning(layer_stats(c("BO_calcite", "blabla")), "'blabla'")
@@ -32,7 +39,7 @@ test_that("layer_stats with non existing layercodes generates a warning", {
 
 test_that("layers_correlation without args returns correlations for all layers", {
   ##layers_correlation(layercodes = c())
-  layers <- list_layers()
+  layers <- skip_version(list_layers(), "Bio-ORACLE", 2.1)
   corr <- layers_correlation()
   expect_equal(nrow(layers), nrow(corr))
   expect_equal(nrow(layers), ncol(corr))
@@ -52,6 +59,8 @@ test_that("layers_correlation with one or more existing layercodes works", {
 
 test_that("layers_correlation with non existing layercodes generates a warning", {
   skip_on_cran()
+  skip_on_travis()
+  
   expect_warning(layers_correlation("abcd"), "'abcd'")
   expect_warning(layers_correlation(c("BO_calcite", "blabla")), "'blabla'")
   expect_equal(colnames(layers_correlation(c("BO_calcite", "blabla"))), "BO_calcite")
@@ -90,6 +99,8 @@ test_that("correlation_groups return correct correlation groups", {
 
 test_that("plot_correlation works", {
   skip_on_cran()
+  skip_on_travis()
+  
   p <- plot_correlation(c("BO_calcite", "BO_sstmax", "MS_bathy_5m"))
   expect_false(any(is.null(p) | is.na(p)))
   
