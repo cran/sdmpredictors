@@ -1,5 +1,6 @@
 library(sdmpredictors)
-
+# These tests are discontinued as the stats are a feature that 
+# is not used by many people. It will be soon deprecated
 context("Statistics")
 
 skip_version <- function(layers, dataset_code, version){
@@ -13,7 +14,7 @@ test_that("layer_stats without args returns all layers", {
   # layers <- layers[layers$layer_code != "WC_TODO",]
   layers <- get_layers_info()$common
   stats <- layer_stats()
-  expect_equal(length(layers$layer_code), nrow(stats))
+  expect_gte(length(layers$layer_code), nrow(stats))
   expect_true(all(stats$layer_code %in% layers$layer_code))
 })
 
@@ -29,17 +30,18 @@ test_that("layer_stats with one or more existing layercodes works", {
 
 test_that("layer_stats with non existing layercodes generates a warning", {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   
   expect_warning(layer_stats("blabla"), "'blabla'")
   expect_warning(layer_stats(c("BO_calcite", "blabla")), "'blabla'")
-  expect_equal(nrow(layer_stats(c("BO_calcite", "blabla"))), 1)
+  expect_equal(suppressWarnings(nrow(layer_stats(c("BO_calcite", "blabla")))), 1)
   expect_warning(layer_stats(c("blibli", "blabla")), "'blibli', 'blabla'")
 })
 
 test_that("layers_correlation without args returns correlations for all layers", {
   ##layers_correlation(layercodes = c())
   layers <- skip_version(list_layers(), "Bio-ORACLE", 2.1)
+  layers <- skip_version(layers, "Bio-ORACLE", 2.2)
   corr <- layers_correlation()
   expect_equal(nrow(layers), nrow(corr))
   expect_equal(nrow(layers), ncol(corr))
@@ -59,12 +61,12 @@ test_that("layers_correlation with one or more existing layercodes works", {
 
 test_that("layers_correlation with non existing layercodes generates a warning", {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   
   expect_warning(layers_correlation("abcd"), "'abcd'")
   expect_warning(layers_correlation(c("BO_calcite", "blabla")), "'blabla'")
-  expect_equal(colnames(layers_correlation(c("BO_calcite", "blabla"))), "BO_calcite")
-  expect_equal(nrow(layers_correlation(c("BO_calcite", "blabla"))), 1)
+  expect_equal(suppressWarnings(colnames(layers_correlation(c("BO_calcite", "blabla")))), "BO_calcite")
+  expect_equal(suppressWarnings(nrow(layers_correlation(c("BO_calcite", "blabla")))), 1)
   expect_warning(layers_correlation(c("blibli", "blabla")), "'blibli', 'blabla'")
 })
 
@@ -99,7 +101,7 @@ test_that("correlation_groups return correct correlation groups", {
 
 test_that("plot_correlation works", {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   
   p <- plot_correlation(c("BO_calcite", "BO_sstmax", "MS_bathy_5m"))
   expect_false(any(is.null(p) | is.na(p)))
@@ -112,7 +114,7 @@ test_that("plot_correlation works", {
 })
 
 test_that("calc_stats returns stats", {
-  s <- calculate_statistics("mini_raster", raster(matrix(1:100, nrow=10, ncol=10)))
+  s <- suppressWarnings(calculate_statistics("mini_raster", raster(matrix(1:100, nrow=10, ncol=10))))
   expect_true(ncol(s) >= 11)
   expect_equal(nrow(s), 1)
 })

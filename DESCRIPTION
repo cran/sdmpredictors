@@ -1,34 +1,33 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.9
-Date: 2020-10-09
+Version: 0.2.10
+Date: 2021-09-20
 Depends: R (>= 3.2.5), raster (>= 2.5-8), rgdal (>= 1.1-10)
 Imports: R.utils (>= 2.4.0), stats, utils, RCurl
 Authors@R: c(
     person("Samuel", "Bosch", email = "mail@samuelbosch.com", role = c("aut")),
     person("Lennert", "Tyberghein", email = "lennert.tyberghein@vliz.be", role = c("ctb")),
     person("Olivier", "De Clerck", email = "olivier.declerck@ugent.be", role = c("ctb")),
-    person("Salvador", "Fernandez", email = "salvador.fernandez@vliz.be", role = c("ctb", "cre")),
+    person("Salvador", "Fernandez", email = "salvador.fernandez@vliz.be", role = c("aut", "cre")),
     person("Lennert", "Schepers", email = "lennert.schepers@vliz.be", role = c("ctb")))
 Description: Terrestrial and marine predictors for species distribution modelling
     from multiple sources, including WorldClim <https://www.worldclim.org/>,,
     ENVIREM <https://envirem.github.io/>, Bio-ORACLE <https://bio-oracle.org/>
     and MARSPEC <http://www.marspec.org/>.
 License: MIT + file LICENSE
-URL: https://www.samuelbosch.com/p/sdmpredictors.html
+URL: http://lifewatch.github.io/sdmpredictors/
 BugReports: https://github.com/lifewatch/sdmpredictors/issues
-LazyData: true
 Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-10-09 14:59:23 UTC; salvadorf
+Packaged: 2021-09-20 12:35:43 UTC; salvadorf
 Author: Samuel Bosch [aut],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb],
-  Salvador Fernandez [ctb, cre],
+  Salvador Fernandez [aut, cre],
   Lennert Schepers [ctb]
 Maintainer: Salvador Fernandez <salvador.fernandez@vliz.be>
 Repository: CRAN
-Date/Publication: 2020-10-13 12:50:02 UTC
+Date/Publication: 2021-09-20 12:50:02 UTC

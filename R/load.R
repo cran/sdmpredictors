@@ -31,6 +31,35 @@ get_datadir <- function(datadir) {
   datadir
 }
 
+#' Project and saves a layer from WGS84 (EPGS:4326) to Behrmann Equal Area (ESRI:54017) coordinate reference system
+#'
+#' @usage equalarea_project(path)
+#'
+#' @param path the path to the WGS84 layer
+#'
+#' @return the path to the Behrmann Equal Area layer
+#' @seealso  \code{\link{load_layers}}
+#' @keywords internal
+equalarea_project <- function(path){
+  if(grepl(".zip", path, fixed = TRUE)){
+    vsizip <- "/vsizip/"
+    out_path <- gsub(".zip", ".tif", path, fixed = TRUE)
+  }else{
+    vsizip <- ""
+    out_path <- gsub("_lonlat.tif", ".tif", path, fixed = TRUE)
+  }
+  stopifnot(out_path != path)
+  if(!file.exists(out_path)){
+    r <- raster::raster(paste0(vsizip, path))
+    message(paste0("Projecting ", path, " from native WGS84 to Behrmann Equal Areas. This might take a few minutes."))
+    if(grepl("/FW_", path, ignore.case = FALSE, fixed = TRUE)){res = 815}else{res = 7000} # Quickfix. Ideally: get res from .data
+    out <- raster::projectRaster(r, crs = sdmpredictors::equalareaproj, method = "ngb", res = res)
+    raster::writeRaster(out, out_path)
+  }
+  stopifnot(as.character(raster(out_path)@crs) == as.character(sdmpredictors::equalareaproj))
+  return(out_path)
+}
+
 #' Load layers
 #' 
 #' Method to load rasters from disk or from the internet. By default a 
@@ -80,13 +109,17 @@ load_layers <- function(layercodes, equalarea = FALSE, rasterstack = TRUE, datad
   if(max(counts) != NROW(layercodes)) {
     warning("Layers from different eras (current, future, paleo) are being loaded together")
   }
+  if(!rgdal::GDALis3ormore()){
+    warning("GDAL is lower than version 3. Consider updating GDAL to avoid errors.")
+  }
   datadir <- get_datadir(datadir)
-  urlroot <- get_sysdata()$urldata
   get_layerpath <- function(layercode) {
-    suffix <- ifelse(equalarea, "", "_lonlat")
-    path <- paste0(datadir, "/", layercode, suffix, ".tif")
+    layer_url <- subset(info$common, info$common$layer_code == layercode)$layer_url
+    if(grepl(".zip", layer_url, ignore.case = FALSE, fixed = TRUE)){
+      ext <- "_lonlat.zip"
+    }else{ext <- "_lonlat.tif"}
+    path <- paste0(datadir, "/", layercode, ext)
     if(!file.exists(path)) {
-      url <- paste0(urlroot, layercode, suffix, ".tif")
       ok <- -1
       # clean up of download failed
       on.exit({
@@ -94,32 +127,46 @@ load_layers <- function(layercodes, equalarea = FALSE, rasterstack = TRUE, datad
           file.remove(path)
         }
       })
-      ok <- utils::download.file(url, path, method = "auto", quiet = FALSE, mode = "wb")  
+      ok <- utils::download.file(layer_url, path, method = "auto", quiet = FALSE, mode = "wb")  
     }
     ifelse(file.exists(path), path, NA)
   }
-  
   paths <- sapply(layercodes, get_layerpath)
+  if(equalarea){
+    customSupressWarning <- function(w){if(any(grepl( "point", w))){invokeRestart( "muffleWarning")}} 
+    paths <- withCallingHandlers(sapply(paths, equalarea_project), warning = customSupressWarning)
+  }
   if(rasterstack) {
-    st <- raster::stack(paths)
-    
-    if("layer" %in% names(st)){
-      names(st) <- layercodes
-    }else(
-      names(st) <- sub("_lonlat$", "", names(st))
-    )
-    
-    return(st)
+    logical_zip <- grepl(".zip", paths, fixed = TRUE)
+    if(all(logical_zip) | !any(logical_zip)){
+      if(all(logical_zip)){
+        vsizip <- "/vsizip/"
+      }else if(!any(logical_zip)){
+        vsizip <- ""
+      }
+      st <- raster::stack(paste0(vsizip, paths))
+      if("layer" %in% names(st)){
+        names(st) <- layercodes
+      }else(
+        names(st) <- sub("_lonlat$", "", names(st))
+      )
+      return(st)
+    }else{
+      stop("Rasterstack for zipped and non-zipped files not supported. Try `rasterstack = FALSE`")
+    }
   } else {
     return(lapply(paths, function(path) { 
-      r <- raster::raster(path) 
-      
+      if(grepl(".zip", path, fixed = TRUE)){
+        vsizip <- "/vsizip/"
+      }else{
+        vsizip <- ""
+      }
+      r <- raster::raster(paste0(vsizip, path))
       if("layer" %in% names(r)){
         names(r) <- layercodes
       }else(
         names(r) <- sub("_lonlat$", "", names(r))
       )
-      
       r}))
   }
 }
@@ -132,4 +179,4 @@ lonlatproj <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
 #' World Behrmann equal area coordinate reference system (ESRI:54017), used when
 #' using load_layers with equal_area = TRUE
 #' @export
-equalareaproj <- sp::CRS("+proj=cea +lat_ts=30 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+equalareaproj <- sp::CRS("+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")

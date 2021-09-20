@@ -24,19 +24,19 @@ print(lapply(dataset_citations("WorldClim", astext = FALSE), toBibtex))
 # print the citation for a MARSPEC paleo layer
 print(layer_citations("MS_biogeo02_aspect_NS_21kya"))
 
-## -----------------------------------------------------------------------------
-# download pH and Salinity to the temporary directory
-load_layers(layers[layers$name %in% c("pH", "Salinity") & 
-                     layers$dataset_code == "Bio-ORACLE",], datadir = tempdir())
-
-# set a default datadir, preferably something different from tempdir()
-options(sdmpredictors_datadir= tempdir())
-
-# (down)load specific layers 
-specific <- load_layers(c("BO_ph", "BO_salinity"))
-
-# equal area data (Behrmann equal area projection) 
-equalarea <- load_layers("BO_ph", equalarea = TRUE)
+## ---- eval = FALSE------------------------------------------------------------
+#  # download pH and Salinity to the temporary directory
+#  load_layers(layers[layers$name %in% c("pH", "Salinity") &
+#                       layers$dataset_code == "Bio-ORACLE",], datadir = tempdir())
+#  
+#  # set a default datadir, preferably something different from tempdir()
+#  options(sdmpredictors_datadir= tempdir())
+#  
+#  # (down)load specific layers
+#  specific <- load_layers(c("BO_ph", "BO_salinity"))
+#  
+#  # equal area data (Behrmann equal area projection)
+#  equalarea <- load_layers("BO_ph", equalarea = TRUE)
 
 ## -----------------------------------------------------------------------------
 # exploring the available future marine layers 
