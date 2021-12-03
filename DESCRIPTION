@@ -1,10 +1,10 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.10
-Date: 2021-09-20
-Depends: R (>= 3.2.5), raster (>= 2.5-8), rgdal (>= 1.1-10)
-Imports: R.utils (>= 2.4.0), stats, utils, RCurl
+Version: 0.2.11
+Date: 2021-12-03
+Depends: R (>= 3.2.5)
+Imports: R.utils (>= 2.4.0), stats, utils, raster, rgdal
 Authors@R: c(
     person("Samuel", "Bosch", email = "mail@samuelbosch.com", role = c("aut")),
     person("Lennert", "Tyberghein", email = "lennert.tyberghein@vliz.be", role = c("ctb")),
@@ -22,7 +22,7 @@ Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-09-20 12:35:43 UTC; salvadorf
+Packaged: 2021-12-03 15:16:05 UTC; salvadorf
 Author: Samuel Bosch [aut],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb],
@@ -30,4 +30,4 @@ Author: Samuel Bosch [aut],
   Lennert Schepers [ctb]
 Maintainer: Salvador Fernandez <salvador.fernandez@vliz.be>
 Repository: CRAN
-Date/Publication: 2021-09-20 12:50:02 UTC
+Date/Publication: 2021-12-03 15:50:02 UTC
