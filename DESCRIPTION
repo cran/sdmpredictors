@@ -1,8 +1,8 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.11
-Date: 2021-12-03
+Version: 0.2.12
+Date: 2022-02-23
 Depends: R (>= 3.2.5)
 Imports: R.utils (>= 2.4.0), stats, utils, raster, rgdal
 Authors@R: c(
@@ -18,11 +18,11 @@ Description: Terrestrial and marine predictors for species distribution modellin
 License: MIT + file LICENSE
 URL: http://lifewatch.github.io/sdmpredictors/
 BugReports: https://github.com/lifewatch/sdmpredictors/issues
-Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown
+Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown, httr
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-12-03 15:16:05 UTC; salvadorf
+Packaged: 2022-02-23 14:34:52 UTC; salvadorf
 Author: Samuel Bosch [aut],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb],
@@ -30,4 +30,4 @@ Author: Samuel Bosch [aut],
   Lennert Schepers [ctb]
 Maintainer: Salvador Fernandez <salvador.fernandez@vliz.be>
 Repository: CRAN
-Date/Publication: 2021-12-03 15:50:02 UTC
+Date/Publication: 2022-02-24 07:50:08 UTC

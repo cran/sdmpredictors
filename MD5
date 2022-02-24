@@ -1,7 +1,7 @@
-6c9978ef1078ce9605ade70dc7e18673 *DESCRIPTION
+4db0fe316106746f5a0c5d8c2033680e *DESCRIPTION
 75ef7cf6a724e1f7802dd1648c4a9659 *LICENSE
 0f4504ec42d5482537b8e88e144cc857 *NAMESPACE
-da4e380849bf417469a9a25ba28646d4 *NEWS.md
+46023d0b7a3ce90612cd0f783d2c4c9c *NEWS.md
 b58e4a03ead43e9ebcd56667258b57a2 *R/citations.R
 21b665ed9a9827ff82396a6584aba5ce *R/compression.R
 4ccc4d448ac7076476de848d03ba2804 *R/get_sysdata.R
@@ -9,14 +9,14 @@ c457c5a9a9d4c627ae987fa12a192a32 *R/list.R
 f1f87e17e34a7d2a28a30313eaf68422 *R/load.R
 71cfc70261bb27714c628bf03f59ea1a *R/sdmpredictors.R
 a6e04aabf5be6b146f1ec6125a72e540 *R/stats.R
-1e73853e2c0105b7c3b790c13a2897ba *R/sysdata.rda
+ed0acfd644c4683aafb720e6b9e170f8 *R/sysdata.rda
 865ee2effe5aea85fe32c3202c02791c *R/translator.R
 47df95b2f376c13a7430a7d6e720c773 *README.md
-842852bd89e2422f5a191a81fdafe3fc *build/partial.rdb
+a2326f0916b8f5a0325e480eb6dc3031 *build/partial.rdb
 df969d66c96b450f4962b4a7a474427d *build/vignette.rds
 676f0eacdb447a7980dda3d6a450da89 *inst/doc/quickstart.R
 803ff2f8054b43a271bd9716718a8961 *inst/doc/quickstart.Rmd
-3be8b642a85dfd5f1bc722aef5aefdbd *inst/doc/quickstart.html
+cab220949d1d59c1fe47537bd2345725 *inst/doc/quickstart.html
 5186943d6d541e927e67337aa15821f0 *man/calculate_statistics.Rd
 f3a6bc1dd2ca95c48d90a2636cde78f1 *man/compress_file.Rd
 5d0c1e6d1f9193ea0f387687021390f7 *man/correlation_groups.Rd
@@ -45,7 +45,7 @@ d67c672c9afc3b5c6540cd609b63faae *man/plot_correlation.Rd
 c13938d58a6b8a6905b8acfc4c2753c4 *tests/testthat.R
 1ba93e9f680226926d33231d691e5462 *tests/testthat/test_citations.R
 812d8fdad78339bbd7a6a4edb6fff5d4 *tests/testthat/test_compression.R
-71428155a43ddbf704c8d6c768edf167 *tests/testthat/test_get_sysdata.R
+0b98c4ac950688bd59ccb0fd1beb491b *tests/testthat/test_get_sysdata.R
 2930e55fa036a68ebe0c9bd722dbda6a *tests/testthat/test_list.R
 27b4740ec1f388fff3d76c7ff0031e01 *tests/testthat/test_load.R
 d6e4edec3a885fbf8ba1a62039343438 *tests/testthat/test_stats.R
