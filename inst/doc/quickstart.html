@@ -12,11 +12,10 @@
 
 <meta name="author" content="Samuel Bosch" />
 
-<meta name="date" content="2022-02-23" />
+<meta name="date" content="2022-09-13" />
 
 <title>sdmpredictors quickstart guide</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -37,28 +36,26 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -67,9 +64,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -127,7 +124,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">sdmpredictors quickstart guide</h1>
 <h4 class="author">Samuel Bosch</h4>
-<h4 class="date">2022-02-23</h4>
+<h4 class="date">2022-09-13</h4>
 
 
 
@@ -152,18 +329,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="list_datasets" class="section level3">
 <h3>list_datasets</h3>
 <p>With the <em>list_datasets</em> function you can view all the available datasets. If you only want terrestrial datasets then you have to set the marine parameter to FALSE and vice versa.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sdmpredictors)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exploring the marine datasets </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">terrestrial =</span> <span class="cn">FALSE</span>, <span class="at">marine =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(sdmpredictors)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># exploring the marine datasets </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">datasets &lt;-<span class="st"> </span><span class="kw">list_datasets</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>, <span class="dt">marine =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <table style="width:100%;">
 <colgroup>
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="2%" />
-<col width="72%" />
-<col width="22%" />
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="0%"></col>
+<col width="2%"></col>
+<col width="72%"></col>
+<col width="22%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -198,14 +375,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="list_layers" class="section level3">
 <h3>list_layers</h3>
 <p>Using the <em>list_layers</em> function we can view all layer information based on datasets, terrestrial (TRUE/FALSE), marine (TRUE/FALSE) and/or whether it should be monthly data. The table only shows the first 4 columns of the first 3 layers.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exploring the marine layers </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>layers <span class="ot">&lt;-</span> <span class="fu">list_layers</span>(datasets)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># exploring the marine layers </span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(datasets)</a></code></pre></div>
 <table>
 <colgroup>
-<col width="4%" />
-<col width="4%" />
-<col width="8%" />
-<col width="82%" />
+<col width="12%"></col>
+<col width="24%"></col>
+<col width="18%"></col>
+<col width="43%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -217,22 +394,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Bio-ORACLE</td>
-<td align="left">BO_calcite</td>
-<td align="left">Calcite (mean)</td>
-<td align="left">Calcite concentration indicates the mean concentration of calcite (CaCO3) in oceans.</td>
+<td align="left">MARSPEC</td>
+<td align="left">MS_bathy_5m</td>
+<td align="left">Bathymetry</td>
+<td align="left">Depth of the seafloor</td>
 </tr>
 <tr class="even">
-<td align="left">Bio-ORACLE</td>
-<td align="left">BO_chlomax</td>
-<td align="left">Chlorophyll A (maximum)</td>
-<td align="left">Chlorophyll A concentration indicates the concentration of photosynthetic pigment chlorophyll A (the most common green chlorophyll) in oceans. Please note that in shallow water these values may reflect any kind of autotrophic biomass.</td>
+<td align="left">MARSPEC</td>
+<td align="left">MS_biogeo01_aspect_EW_5m</td>
+<td align="left">East/West aspect</td>
+<td align="left">East/West Aspect (sin(aspect in radians))</td>
 </tr>
 <tr class="odd">
-<td align="left">Bio-ORACLE</td>
-<td align="left">BO_chlomean</td>
-<td align="left">Chlorophyll A (mean)</td>
-<td align="left">Chlorophyll A concentration indicates the concentration of photosynthetic pigment chlorophyll A (the most common green chlorophyll) in oceans. Please note that in shallow water these values may reflect any kind of autotrophic biomass.</td>
+<td align="left">MARSPEC</td>
+<td align="left">MS_biogeo02_aspect_NS_5m</td>
+<td align="left">North/South Aspect</td>
+<td align="left">North/South Aspect (cos(aspect in radians))</td>
 </tr>
 </tbody>
 </table>
@@ -241,12 +418,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="citing-data" class="section level2">
 <h2>Citing data</h2>
 <p>With the <em>dataset_citations</em> and <em>layer_citations</em> functions you can fetch plain text or bibentries for the datasets and layers used, allowing for proper citation of the data.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the Bio-ORACLE citation</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dataset_citations</span>(<span class="st">&quot;Bio-ORACLE&quot;</span>))</span></code></pre></div>
-<pre><code>## [1] &quot;Assis J, Tyberghein L, Bosch S, Heroen V, SerrÃ£o E, De Clerck O, Tittensor D (2018). \&quot;Bioâ\200\220ORACLE v2.0: Extending marine data layers\nfor bioclimatic modelling.\&quot; _Global Ecology and Biogeography_, *27*(3),\n277-284. doi: 10.1111/geb.12693 (URL:\nhttps://doi.org/10.1111/geb.12693).&quot;                             
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># print the Bio-ORACLE citation</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">dataset_citations</span>(<span class="st">&quot;Bio-ORACLE&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;Assis J, Tyberghein L, Bosch S, Heroen V, Serrão E, De Clerck O, Tittensor D (2018). \&quot;Bio‐ORACLE v2.0: Extending marine data layers for\nbioclimatic modelling.\&quot; _Global Ecology and Biogeography_, *27*(3),\n277-284. doi: 10.1111/geb.12693 (URL:\nhttps://doi.org/10.1111/geb.12693).&quot;                                
 ## [2] &quot;Tyberghein L, Heroen V, Pauly K, Troupin C, Mineur F, De Clerck O (2012). \&quot;Bio-ORACLE: a global environmental dataset for marine species\ndistribution modelling.\&quot; _Global Ecology and Biogeography_, *21*(2),\n272-281. doi: 10.1111/j.1466-8238.2011.00656.x (URL:\nhttps://doi.org/10.1111/j.1466-8238.2011.00656.x).&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the citation for ENVIREM as Bibtex</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">lapply</span>(<span class="fu">dataset_citations</span>(<span class="st">&quot;WorldClim&quot;</span>, <span class="at">astext =</span> <span class="cn">FALSE</span>), toBibtex))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># print the citation for ENVIREM as Bibtex</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">lapply</span>(<span class="kw">dataset_citations</span>(<span class="st">&quot;WorldClim&quot;</span>, <span class="dt">astext =</span> <span class="ot">FALSE</span>), toBibtex))</a></code></pre></div>
 <pre><code>## $WorldClim
 ## @Article{WorldClim,
 ##   author = {Robert J. Hijmans and Susan E. Cameron and Juan L. Parra and Peter G. Jones and Andy Jarvis},
@@ -258,8 +435,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   pages = {1965-1978},
 ##   doi = {10.1002/joc.1276},
 ## }</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the citation for a MARSPEC paleo layer</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">layer_citations</span>(<span class="st">&quot;MS_biogeo02_aspect_NS_21kya&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># print the citation for a MARSPEC paleo layer</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">layer_citations</span>(<span class="st">&quot;MS_biogeo02_aspect_NS_21kya&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;Sbrocco EJ, Barber PH (2013). \&quot;MARSPEC: ocean climate layers for marine spatial ecology.\&quot; _Ecology_, *94*(4), 979. doi: 10.1890/12-1358.1 (URL:\nhttps://doi.org/10.1890/12-1358.1).&quot;                       
 ## [2] &quot;Sbrocco EJ (2014). \&quot;Paleo-MARSPEC: gridded ocean climate layers for the mid-Holocene and Last Glacial Maximum.\&quot; _Ecology_, *95*(6), 1710. doi:\n10.1890/14-0443.1 (URL: https://doi.org/10.1890/14-0443.1).&quot;</code></pre>
 </div>
@@ -268,55 +445,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load_layers" class="section level3">
 <h3>load_layers</h3>
 <p>To be able to use the layers you want in R you have to call the <em>load_layers</em> function with</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download pH and Salinity to the temporary directory</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load_layers</span>(layers[layers<span class="sc">$</span>name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;pH&quot;</span>, <span class="st">&quot;Salinity&quot;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                     layers<span class="sc">$</span>dataset_code <span class="sc">==</span> <span class="st">&quot;Bio-ORACLE&quot;</span>,], <span class="at">datadir =</span> <span class="fu">tempdir</span>())</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set a default datadir, preferably something different from tempdir()</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">sdmpredictors_datadir=</span> <span class="fu">tempdir</span>())</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (down)load specific layers </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>specific <span class="ot">&lt;-</span> <span class="fu">load_layers</span>(<span class="fu">c</span>(<span class="st">&quot;BO_ph&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># equal area data (Behrmann equal area projection) </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>equalarea <span class="ot">&lt;-</span> <span class="fu">load_layers</span>(<span class="st">&quot;BO_ph&quot;</span>, <span class="at">equalarea =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># download pH and Salinity to the temporary directory</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">load_layers</span>(layers[layers<span class="op">$</span>name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pH&quot;</span>, <span class="st">&quot;Salinity&quot;</span>) <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">                     </span>layers<span class="op">$</span>dataset_code <span class="op">==</span><span class="st"> &quot;Bio-ORACLE&quot;</span>,], <span class="dt">datadir =</span> <span class="kw">tempdir</span>())</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># set a default datadir, preferably something different from tempdir()</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw">options</span>(<span class="dt">sdmpredictors_datadir=</span> <span class="kw">tempdir</span>())</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co"># (down)load specific layers </span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">specific &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_ph&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>))</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co"># equal area data (Behrmann equal area projection) </span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">equalarea &lt;-<span class="st"> </span><span class="kw">load_layers</span>(<span class="st">&quot;BO_ph&quot;</span>, <span class="dt">equalarea =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="loading-future-and-paleo-data" class="section level2">
 <h2>Loading future and paleo data</h2>
 <p>Similarly to the current climate layers</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exploring the available future marine layers </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">list_layers_future</span>(<span class="at">terrestrial =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># available scenarios </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(future<span class="sc">$</span>scenario) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># exploring the available future marine layers </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">future &lt;-<span class="st"> </span><span class="kw">list_layers_future</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co"># available scenarios </span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">unique</span>(future<span class="op">$</span>scenario) </a></code></pre></div>
 <pre><code>## [1] &quot;A1B&quot;   &quot;A2&quot;    &quot;B1&quot;    &quot;RCP26&quot; &quot;RCP45&quot; &quot;RCP60&quot; &quot;RCP85&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(future<span class="sc">$</span>year)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">unique</span>(future<span class="op">$</span>year)</a></code></pre></div>
 <pre><code>## [1] 2100 2200 2050</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>paleo <span class="ot">&lt;-</span> <span class="fu">list_layers_paleo</span>(<span class="at">terrestrial =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(paleo<span class="sc">$</span>epoch) </span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">paleo &lt;-<span class="st"> </span><span class="kw">list_layers_paleo</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">unique</span>(paleo<span class="op">$</span>epoch) </a></code></pre></div>
 <pre><code>## [1] &quot;Last Glacial Maximum&quot; &quot;mid-Holocene&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(paleo<span class="sc">$</span>model_name) </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">unique</span>(paleo<span class="op">$</span>model_name) </a></code></pre></div>
 <pre><code>## [1] &quot;21kya_geophysical&quot;      &quot;21kya_ensemble_adjCCSM&quot; &quot;21kya_ensemble_noCCSM&quot; 
 ## [4] &quot;6kya_Ensemble&quot;</code></pre>
 <p>Other functions related to layers metadata and future and paleo layers are:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_layers_info</span>(<span class="fu">c</span>(<span class="st">&quot;BO_calcite&quot;</span>,<span class="st">&quot;BO_B1_2100_sstmax&quot;</span>,<span class="st">&quot;MS_bathy_21kya&quot;</span>))<span class="sc">$</span>common</span></code></pre></div>
-<pre><code>##        time dataset_code        layer_code
-## 69  current   Bio-ORACLE        BO_calcite
-## 17   future   Bio-ORACLE BO_B1_2100_sstmax
-## 101   paleo      MARSPEC    MS_bathy_21kya
-##                                                            layer_url
-## 69                    https://bio-oracle.org/data/1.0/BO_calcite.zip
-## 17             https://bio-oracle.org/data/1.0/BO_B1_2100_sstmax.zip
-## 101 https://www.lifewatch.be/sdmpredictors/MS_bathy_21kya_lonlat.tif</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># functions to get the equivalent future layer code for a current climate layer </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_future_layers</span>(<span class="fu">c</span>(<span class="st">&quot;BO_sstmax&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>), </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">scenario =</span> <span class="st">&quot;B1&quot;</span>, </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">year =</span> <span class="dv">2100</span>)<span class="sc">$</span>layer_code </span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">get_layers_info</span>(<span class="kw">c</span>(<span class="st">&quot;BO_calcite&quot;</span>,<span class="st">&quot;BO_B1_2100_sstmax&quot;</span>,<span class="st">&quot;MS_bathy_21kya&quot;</span>))<span class="op">$</span>common</a></code></pre></div>
+<pre><code>##         time dataset_code        layer_code
+## 461  current   Bio-ORACLE        BO_calcite
+## 1337  future   Bio-ORACLE BO_B1_2100_sstmax
+## 101    paleo      MARSPEC    MS_bathy_21kya
+##                                                             layer_url
+## 461                    https://bio-oracle.org/data/1.0/BO_calcite.zip
+## 1337            https://bio-oracle.org/data/1.0/BO_B1_2100_sstmax.zip
+## 101  https://www.lifewatch.be/sdmpredictors/MS_bathy_21kya_lonlat.tif</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># functions to get the equivalent future layer code for a current climate layer </span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">get_future_layers</span>(<span class="kw">c</span>(<span class="st">&quot;BO_sstmax&quot;</span>, <span class="st">&quot;BO_salinity&quot;</span>), </a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">                  <span class="dt">scenario =</span> <span class="st">&quot;B1&quot;</span>, </a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">                  <span class="dt">year =</span> <span class="dv">2100</span>)<span class="op">$</span>layer_code </a></code></pre></div>
 <pre><code>## [1] &quot;BO_B1_2100_salinity&quot; &quot;BO_B1_2100_sstmax&quot;</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># functions to get the equivalent paleo layer code for a current climate layer </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_paleo_layers</span>(<span class="fu">c</span>(<span class="st">&quot;MS_bathy_5m&quot;</span>, <span class="st">&quot;MS_biogeo13_sst_mean_5m&quot;</span>), </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">model_name =</span> <span class="fu">c</span>(<span class="st">&quot;21kya_geophysical&quot;</span>, <span class="st">&quot;21kya_ensemble_adjCCSM&quot;</span>), </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">years_ago =</span> <span class="dv">21000</span>)<span class="sc">$</span>layer_code </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># functions to get the equivalent paleo layer code for a current climate layer </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">get_paleo_layers</span>(<span class="kw">c</span>(<span class="st">&quot;MS_bathy_5m&quot;</span>, <span class="st">&quot;MS_biogeo13_sst_mean_5m&quot;</span>), </a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">                 <span class="dt">model_name =</span> <span class="kw">c</span>(<span class="st">&quot;21kya_geophysical&quot;</span>, <span class="st">&quot;21kya_ensemble_adjCCSM&quot;</span>), </a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">                 <span class="dt">years_ago =</span> <span class="dv">21000</span>)<span class="op">$</span>layer_code </a></code></pre></div>
 <pre><code>## [1] &quot;MS_bathy_21kya&quot;                     &quot;MS_biogeo13_sst_mean_21kya_adjCCSM&quot;</code></pre>
 </div>
 <div id="statistics" class="section level2">
@@ -330,42 +507,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Pearson correlation coefficient between the different layers and their quadratic</li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># looking up statistics and correlations for marine annual layers</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">terrestrial =</span> <span class="cn">FALSE</span>, <span class="at">marine =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>layers <span class="ot">&lt;-</span> <span class="fu">list_layers</span>(datasets)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out monthly layers</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>layers <span class="ot">&lt;-</span> layers[<span class="fu">is.na</span>(layers<span class="sc">$</span>month),]</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">layer_stats</span>(layers)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># looking up statistics and correlations for marine annual layers</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">datasets &lt;-<span class="st"> </span><span class="kw">list_datasets</span>(<span class="dt">terrestrial =</span> <span class="ot">FALSE</span>, <span class="dt">marine =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">layers &lt;-<span class="st"> </span><span class="kw">list_layers</span>(datasets)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co"># filter out monthly layers</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">layers &lt;-<span class="st"> </span>layers[<span class="kw">is.na</span>(layers<span class="op">$</span>month),]</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="kw">layer_stats</span>(layers)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,]</a></code></pre></div>
 <pre><code>##      layer_code minimum    q1 median    q3 maximum      mad      mean       sd
 ## 26  BO_bathymax   -9906 -4748  -3948 -2784    2361 1361.027 -3525.239 1651.386
 ## 27 BO_bathymean  -10494 -4876  -4098 -3005    1721 1307.653 -3675.429 1645.478
 ##        moran      geary
 ## 26 0.9670128 0.01461685
 ## 27 0.9706400 0.01073758</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">layers_correlation</span>(layers)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create groups of layers where no layers in one group </span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># have a correlation &gt; 0.7 with a layer from another group </span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">correlation_groups</span>(correlations, <span class="at">max_correlation=</span><span class="fl">0.7</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># group lengths</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(groups, length)</span></code></pre></div>
-<pre><code>##  [1]  1 34 57  1 24  4  4  1  1  1  2  1  1  2 18 60  9 24  6  3 12  2  2  2  2</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(group <span class="cf">in</span> groups) {</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(group) <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="fu">paste</span>(group, <span class="at">collapse =</span><span class="st">&quot;, &quot;</span>))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## BO_chlomax, BO_chlomean, BO_chlomin, BO_chlorange, BO_damax, BO_damean, BO_damin, BO2_ironmax_bdmax, BO2_ironmax_bdmean, BO2_ironmax_bdmin, BO2_ironmean_bdmax, BO2_ironmean_bdmean, BO2_ironmean_bdmin, BO2_ironmin_bdmax, BO2_ironmin_bdmean, BO2_ironmin_bdmin, BO2_ironrange_bdmax, BO2_ironrange_bdmean, BO2_ironrange_bdmin, BO2_ironltmax_bdmax, BO2_ironltmax_bdmean, BO2_ironltmax_bdmin, BO2_ironltmin_bdmax, BO2_ironltmin_bdmean, BO2_ironltmin_bdmin, BO2_carbonphytomax_bdmax, BO2_salinityrange_bdmean, BO2_salinityrange_bdmin, BO2_ironmax_ss, BO2_ironmean_ss, BO2_ironmin_ss, BO2_ironltmax_ss, BO2_ironltmin_ss, BO2_ironrange_ss
-## BO_cloudmean, BO_cloudmin, BO_parmean, BO_dissox, BO_nitrate, BO_phosphate, BO_silicate, BO_sstmax, BO_sstmean, BO_sstmin, MS_biogeo13_sst_mean_5m, MS_biogeo14_sst_min_5m, MS_biogeo15_sst_max_5m, BO2_templtmax_ss, BO2_templtmin_ss, BO2_tempmax_ss, BO2_tempmean_ss, BO2_tempmin_ss, BO2_dissoxmax_ss, BO2_dissoxmean_ss, BO2_dissoxmin_ss, BO2_dissoxltmax_ss, BO2_dissoxltmin_ss, BO2_phosphatemax_ss, BO2_phosphatemean_ss, BO2_phosphatemin_ss, BO2_phosphateltmax_ss, BO2_phosphateltmin_ss, BO2_nitratemax_ss, BO2_nitratemean_ss, BO2_nitratemin_ss, BO2_nitrateltmax_ss, BO2_nitrateltmin_ss, BO2_silicatemax_ss, BO2_silicatemean_ss, BO2_silicatemin_ss, BO2_silicaterange_ss, BO2_silicateltmax_ss, BO2_silicateltmin_ss, BO2_chlomax_ss, BO2_chlomean_ss, BO2_chlorange_ss, BO2_chloltmax_ss, BO2_carbonphytomax_ss, BO2_carbonphytorange_ss, BO2_carbonphytoltmax_ss, BO2_carbonphytomean_ss, BO2_ppmax_ss, BO2_ppmean_ss, BO2_pprange_ss, BO2_ppltmax_ss, BO2_chlomin_ss, BO2_chloltmin_ss, BO2_carbonphytomin_ss, BO2_carbonphytoltmin_ss, BO2_ppmin_ss, BO2_ppltmin_ss
-## BO_salinity, MS_biogeo08_sss_mean_5m, MS_biogeo09_sss_min_5m, MS_biogeo10_sss_max_5m, BO2_salinitymax_bdmax, BO2_salinitymax_bdmean, BO2_salinitymax_bdmin, BO2_salinitymean_bdmax, BO2_salinitymean_bdmean, BO2_salinitymean_bdmin, BO2_salinitymin_bdmax, BO2_salinitymin_bdmean, BO2_salinitymin_bdmin, BO2_salinityltmax_bdmax, BO2_salinityltmax_bdmean, BO2_salinityltmax_bdmin, BO2_salinityltmin_bdmax, BO2_salinityltmin_bdmean, BO2_salinityltmin_bdmin, BO2_salinitymax_ss, BO2_salinitymean_ss, BO2_salinitymin_ss, BO2_salinityltmax_ss, BO2_salinityltmin_ss
-## BO_sstrange, MS_biogeo16_sst_range_5m, MS_biogeo17_sst_variance_5m, BO2_temprange_ss
-## BO_bathymin, BO_bathymax, BO_bathymean, MS_bathy_5m
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">correlations &lt;-<span class="st"> </span><span class="kw">layers_correlation</span>(layers)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="co"># create groups of layers where no layers in one group </span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="co"># have a correlation &gt; 0.7 with a layer from another group </span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">groups &lt;-<span class="st"> </span><span class="kw">correlation_groups</span>(correlations, <span class="dt">max_correlation=</span><span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7"><span class="co"># group lengths</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="kw">sapply</span>(groups, length)</a></code></pre></div>
+<pre><code>##  [1]  4  1  1  1  2  1  1 24  2 38  4  1 34  1 18 60  9 24  6  3 12 17  2  2  2
+## [26]  2</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="cf">for</span>(group <span class="cf">in</span> groups) {</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">length</span>(group) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="kw">cat</span>(<span class="kw">paste</span>(group, <span class="dt">collapse =</span><span class="st">&quot;, &quot;</span>))</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">}</a></code></pre></div>
+<pre><code>## MS_bathy_5m, BO_bathymin, BO_bathymax, BO_bathymean
 ## MS_biogeo04_profile_curvature_5m, MS_biogeo07_concavity_5m
+## MS_biogeo08_sss_mean_5m, MS_biogeo09_sss_min_5m, MS_biogeo10_sss_max_5m, BO_salinity, BO2_salinitymax_bdmax, BO2_salinitymax_bdmean, BO2_salinitymax_bdmin, BO2_salinitymean_bdmax, BO2_salinitymean_bdmean, BO2_salinitymean_bdmin, BO2_salinitymin_bdmax, BO2_salinitymin_bdmean, BO2_salinitymin_bdmin, BO2_salinityltmax_bdmax, BO2_salinityltmax_bdmean, BO2_salinityltmax_bdmin, BO2_salinityltmin_bdmax, BO2_salinityltmin_bdmean, BO2_salinityltmin_bdmin, BO2_salinitymax_ss, BO2_salinitymean_ss, BO2_salinitymin_ss, BO2_salinityltmax_ss, BO2_salinityltmin_ss
 ## MS_biogeo11_sss_range_5m, MS_biogeo12_sss_variance_5m
+## MS_biogeo13_sst_mean_5m, MS_biogeo14_sst_min_5m, MS_biogeo15_sst_max_5m, BO_dissox, BO_nitrate, BO_parmax, BO_parmean, BO_phosphate, BO_sstmax, BO_sstmean, BO_sstmin, BO2_templtmax_ss, BO2_templtmin_ss, BO2_tempmax_ss, BO2_tempmean_ss, BO2_tempmin_ss, BO2_dissoxmax_ss, BO2_dissoxmean_ss, BO2_dissoxmin_ss, BO2_dissoxltmax_ss, BO2_dissoxltmin_ss, BO2_phosphatemax_ss, BO2_phosphatemean_ss, BO2_phosphatemin_ss, BO2_phosphateltmax_ss, BO2_phosphateltmin_ss, BO2_nitratemax_ss, BO2_nitratemean_ss, BO2_nitratemin_ss, BO2_nitrateltmax_ss, BO2_nitrateltmin_ss, BO_silicate, BO2_silicatemax_ss, BO2_silicatemean_ss, BO2_silicatemin_ss, BO2_silicaterange_ss, BO2_silicateltmax_ss, BO2_silicateltmin_ss
+## MS_biogeo16_sst_range_5m, MS_biogeo17_sst_variance_5m, BO_sstrange, BO2_temprange_ss
+## BO_chlomax, BO_chlomean, BO_chlomin, BO_chlorange, BO_damax, BO_damean, BO_damin, BO2_ironmax_bdmax, BO2_ironmax_bdmean, BO2_ironmax_bdmin, BO2_ironmean_bdmax, BO2_ironmean_bdmean, BO2_ironmean_bdmin, BO2_ironmin_bdmax, BO2_ironmin_bdmean, BO2_ironmin_bdmin, BO2_ironrange_bdmax, BO2_ironrange_bdmean, BO2_ironrange_bdmin, BO2_ironltmax_bdmax, BO2_ironltmax_bdmean, BO2_ironltmax_bdmin, BO2_ironltmin_bdmax, BO2_ironltmin_bdmean, BO2_ironltmin_bdmin, BO2_carbonphytomax_bdmax, BO2_salinityrange_bdmean, BO2_salinityrange_bdmin, BO2_ironmax_ss, BO2_ironmean_ss, BO2_ironmin_ss, BO2_ironltmax_ss, BO2_ironltmin_ss, BO2_ironrange_ss
 ## BO2_curvelmax_bdmax, BO2_curvelmax_bdmean, BO2_curvelmax_bdmin, BO2_curvelmin_bdmax, BO2_curvelmin_bdmean, BO2_curvelltmax_bdmax, BO2_curvelltmax_bdmean, BO2_curvelltmax_bdmin, BO2_curvelltmin_bdmax, BO2_curvelmean_bdmean, BO2_curvelmean_bdmin, BO2_curvelmin_bdmin, BO2_curvelltmin_bdmean, BO2_curvelltmin_bdmin, BO2_curvelmean_bdmax, BO2_curvelrange_bdmax, BO2_curvelrange_bdmean, BO2_curvelrange_bdmin
 ## BO2_dissoxmax_bdmax, BO2_dissoxmax_bdmean, BO2_dissoxmax_bdmin, BO2_dissoxmean_bdmax, BO2_dissoxmean_bdmean, BO2_dissoxmean_bdmin, BO2_dissoxmin_bdmax, BO2_dissoxmin_bdmean, BO2_dissoxmin_bdmin, BO2_dissoxltmax_bdmax, BO2_dissoxltmax_bdmean, BO2_dissoxltmax_bdmin, BO2_dissoxltmin_bdmax, BO2_dissoxltmin_bdmean, BO2_dissoxltmin_bdmin, BO2_phosphatemax_bdmax, BO2_phosphatemax_bdmean, BO2_phosphatemax_bdmin, BO2_phosphatemean_bdmax, BO2_phosphatemean_bdmean, BO2_phosphatemean_bdmin, BO2_phosphatemin_bdmax, BO2_phosphatemin_bdmean, BO2_phosphatemin_bdmin, BO2_phosphateltmax_bdmax, BO2_phosphateltmax_bdmean, BO2_phosphateltmax_bdmin, BO2_phosphateltmin_bdmax, BO2_phosphateltmin_bdmean, BO2_phosphateltmin_bdmin, BO2_nitratemax_bdmax, BO2_nitratemax_bdmean, BO2_nitratemax_bdmin, BO2_nitratemean_bdmax, BO2_nitratemean_bdmean, BO2_nitratemean_bdmin, BO2_nitratemin_bdmax, BO2_nitratemin_bdmean, BO2_nitratemin_bdmin, BO2_nitrateltmax_bdmax, BO2_nitrateltmax_bdmean, BO2_nitrateltmax_bdmin, BO2_nitrateltmin_bdmax, BO2_nitrateltmin_bdmean, BO2_nitrateltmin_bdmin, BO2_silicatemax_bdmax, BO2_silicatemax_bdmean, BO2_silicatemax_bdmin, BO2_silicatemean_bdmax, BO2_silicatemean_bdmean, BO2_silicatemean_bdmin, BO2_silicatemin_bdmax, BO2_silicatemin_bdmean, BO2_silicatemin_bdmin, BO2_silicateltmax_bdmax, BO2_silicateltmax_bdmean, BO2_silicateltmax_bdmin, BO2_silicateltmin_bdmax, BO2_silicateltmin_bdmean, BO2_silicateltmin_bdmin
 ## BO2_dissoxrange_bdmax, BO2_dissoxrange_bdmean, BO2_dissoxrange_bdmin, BO2_phosphaterange_bdmax, BO2_phosphaterange_bdmean, BO2_phosphaterange_bdmin, BO2_nitraterange_bdmax, BO2_nitraterange_bdmean, BO2_nitraterange_bdmin
@@ -373,13 +551,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## BO2_lightbotmax_bdmin, BO2_lightbotmean_bdmin, BO2_lightbotrange_bdmin, BO2_lightbotltmax_bdmin, BO2_lightbotltmin_bdmin, BO2_lightbotmin_bdmin
 ## BO2_silicaterange_bdmax, BO2_silicaterange_bdmean, BO2_silicaterange_bdmin
 ## BO2_icecoverltmax_ss, BO2_icecovermax_ss, BO2_icecovermean_ss, BO2_icecoverrange_ss, BO2_icethickltmax_ss, BO2_icethickmax_ss, BO2_icethickrange_ss, BO2_icecoverltmin_ss, BO2_icethickmean_ss, BO2_icecovermin_ss, BO2_icethickltmin_ss, BO2_icethickmin_ss
+## BO2_chlomax_ss, BO2_chlomean_ss, BO2_chlorange_ss, BO2_chloltmax_ss, BO2_chloltmin_ss, BO2_carbonphytomax_ss, BO2_carbonphytomean_ss, BO2_carbonphytorange_ss, BO2_carbonphytoltmax_ss, BO2_ppltmax_ss, BO2_ppmax_ss, BO2_ppmean_ss, BO2_pprange_ss, BO2_carbonphytomin_ss, BO2_carbonphytoltmin_ss, BO2_ppmin_ss, BO2_ppltmin_ss
 ## BO2_curvelmax_ss, BO2_curvelltmax_ss
 ## BO2_curvelmean_ss, BO2_curvelrange_ss
 ## BO2_curvelmin_ss, BO2_curvelltmin_ss
 ## BO2_phosphaterange_ss, BO2_nitraterange_ss</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot correlations (requires ggplot2)</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_correlation</span>(correlations)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co"># plot correlations (requires ggplot2)</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">plot_correlation</span>(correlations)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 
 
