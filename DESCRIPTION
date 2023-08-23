@@ -1,10 +1,10 @@
 Package: sdmpredictors
 Type: Package
 Title: Species Distribution Modelling Predictor Datasets
-Version: 0.2.14
-Date: 2022-12-14
+Version: 0.2.15
+Date: 2023-08-11
 Depends: R (>= 3.2.5)
-Imports: R.utils (>= 2.4.0), stats, utils, raster, rgdal
+Imports: R.utils (>= 2.4.0), stats, utils, raster, terra
 Authors@R: c(
     person("Samuel", "Bosch", email = "mail@samuelbosch.com", role = c("aut")),
     person("Lennert", "Tyberghein", email = "lennert.tyberghein@vliz.be", role = c("ctb")),
@@ -22,10 +22,10 @@ License: MIT + file LICENSE
 URL: http://lifewatch.github.io/sdmpredictors/
 BugReports: https://github.com/lifewatch/sdmpredictors/issues
 Suggests: ggplot2, reshape2, testthat, knitr, rmarkdown, httr, httr2
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-12-14 15:06:50 UTC; salvadorf
+Packaged: 2023-08-22 09:49:09 UTC; salvadorf
 Author: Samuel Bosch [aut],
   Lennert Tyberghein [ctb],
   Olivier De Clerck [ctb],
@@ -34,4 +34,4 @@ Author: Samuel Bosch [aut],
   LifeWatch Belgium [fnd] (https://lifewatch.be)
 Maintainer: Salvador Fernandez <salvador.fernandez@vliz.be>
 Repository: CRAN
-Date/Publication: 2022-12-14 16:00:02 UTC
+Date/Publication: 2023-08-23 15:50:09 UTC

@@ -1,13 +1,13 @@
-de66c6b9efec41089ff1f8e64c2fb920 *DESCRIPTION
+110b1c1ccc7272f91d4505d079e01712 *DESCRIPTION
 75ef7cf6a724e1f7802dd1648c4a9659 *LICENSE
-0f4504ec42d5482537b8e88e144cc857 *NAMESPACE
-2aa46d3feeff6aa5d9f291cc150169be *NEWS.md
+977fd1672f048ea55725be3188c7ca61 *NAMESPACE
+1ce9a1b7b6ed00a9fdc82e516288a428 *NEWS.md
 b58e4a03ead43e9ebcd56667258b57a2 *R/citations.R
 21b665ed9a9827ff82396a6584aba5ce *R/compression.R
 4ccc4d448ac7076476de848d03ba2804 *R/get_sysdata.R
 c457c5a9a9d4c627ae987fa12a192a32 *R/list.R
-f1f87e17e34a7d2a28a30313eaf68422 *R/load.R
-71cfc70261bb27714c628bf03f59ea1a *R/sdmpredictors.R
+90d9c92dda0b3d1b55b223b167d3ef4a *R/load.R
+05fea1d38ffe937f94fd6dce4f618d58 *R/sdmpredictors.R
 a6e04aabf5be6b146f1ec6125a72e540 *R/stats.R
 9e04a7684205666a7a605f75f5693c2e *R/sysdata.rda
 865ee2effe5aea85fe32c3202c02791c *R/translator.R
@@ -16,7 +16,7 @@ a6e04aabf5be6b146f1ec6125a72e540 *R/stats.R
 857da9fc568322dd7744bba353d0c402 *build/vignette.rds
 676f0eacdb447a7980dda3d6a450da89 *inst/doc/quickstart.R
 803ff2f8054b43a271bd9716718a8961 *inst/doc/quickstart.Rmd
-47c45a1cf6d51a20a8379935bb7e1ab5 *inst/doc/quickstart.html
+0817c591adb56c958d0b078edfc8cca7 *inst/doc/quickstart.html
 5186943d6d541e927e67337aa15821f0 *man/calculate_statistics.Rd
 f3a6bc1dd2ca95c48d90a2636cde78f1 *man/compress_file.Rd
 5d0c1e6d1f9193ea0f387687021390f7 *man/correlation_groups.Rd
@@ -48,7 +48,7 @@ c13938d58a6b8a6905b8acfc4c2753c4 *tests/testthat.R
 812d8fdad78339bbd7a6a4edb6fff5d4 *tests/testthat/test_compression.R
 0b98c4ac950688bd59ccb0fd1beb491b *tests/testthat/test_get_sysdata.R
 2930e55fa036a68ebe0c9bd722dbda6a *tests/testthat/test_list.R
-2342bacd4479511066000b7191a90787 *tests/testthat/test_load.R
+88a9835df23dbd5bb1e091163f2cac61 *tests/testthat/test_load.R
 6181f8f9f9cfd28735a6cab00c3ae2ff *tests/testthat/test_stats.R
 0e16d3d8756641909364a42630437ac8 *tests/testthat/test_zzzfinal.R
 803ff2f8054b43a271bd9716718a8961 *vignettes/quickstart.Rmd
